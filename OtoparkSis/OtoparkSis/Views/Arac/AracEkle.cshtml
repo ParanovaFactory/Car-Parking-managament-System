@@ -1,0 +1,18 @@
+﻿@model OtoparkSis.Models.Entity.Tbl_Arac
+@{
+    ViewBag.Title = "AracEkle";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2>Araç Kayıt</h2>
+<form method="post">
+    <label>Araç Sahibi</label>
+    @Html.DropDownListFor(x => x.Tbl_Musteri.Id, (List<SelectListItem>)
+    ViewBag.must, new { @class = "form-control" })
+    <br />
+    <label>Araç Plakası</label>
+    @Html.TextBoxFor(x => x.Plaka, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info">Ekle</button>
+</form>
+

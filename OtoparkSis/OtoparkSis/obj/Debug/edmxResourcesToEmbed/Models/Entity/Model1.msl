@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbOtoparkModelStoreContainer" CdmEntityContainer="DbOtoparkEntities">
+    <EntitySetMapping Name="tbl_Alanlar">
+      <EntityTypeMapping TypeName="DbOtoparkModel.tbl_Alanlar">
+        <MappingFragment StoreEntitySet="tbl_Alanlar">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Arac">
+      <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Arac">
+        <MappingFragment StoreEntitySet="Tbl_Arac">
+          <ScalarProperty Name="Durum2" ColumnName="Durum2" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AraçSahibi" ColumnName="AraçSahibi" />
+          <ScalarProperty Name="Plaka" ColumnName="Plaka" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Park">
+      <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Park">
+        <MappingFragment StoreEntitySet="Tbl_Park">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Musteri" ColumnName="Musteri" />
+          <ScalarProperty Name="Personel" ColumnName="Personel" />
+          <ScalarProperty Name="Arac" ColumnName="Arac" />
+          <ScalarProperty Name="Konumu" ColumnName="Konumu" />
+          <ScalarProperty Name="GirisTarihi" ColumnName="GirisTarihi" />
+          <ScalarProperty Name="ÇikisTarihi" ColumnName="ÇikisTarihi" />
+          <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Musteri">
+      <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Musteri">
+        <MappingFragment StoreEntitySet="Tbl_Musteri">
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Personel">
+      <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Personel">
+        <MappingFragment StoreEntitySet="Tbl_Personel">
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="BUGUNİSLEM" FunctionName="DbOtoparkModel.Store.BUGUNİSLEM" />
+    <FunctionImportMapping FunctionImportName="ENAKTİFUYE" FunctionName="DbOtoparkModel.Store.ENAKTİFUYE" />
+    <FunctionImportMapping FunctionImportName="ENBASARİLİPER" FunctionName="DbOtoparkModel.Store.ENBASARİLİPER" />
+    <FunctionImportMapping FunctionImportName="UYEARACSAYİSİ" FunctionName="DbOtoparkModel.Store.UYEARACSAYİSİ" />
+    <EntitySetMapping Name="Tbl_Yonetici">
+      <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Yonetici">
+        <MappingFragment StoreEntitySet="Tbl_Yonetici">
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

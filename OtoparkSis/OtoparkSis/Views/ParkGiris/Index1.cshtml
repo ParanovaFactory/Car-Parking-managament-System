@@ -1,0 +1,30 @@
+﻿@using OtoparkSis.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Tbl_Park>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2>Otoparkta Olan Araç Listesi</h2>
+<table class="table table-striped">
+    <tr style="background-color:rgb(252, 178, 22)">
+        <th>Araç Sahibi</th>
+        <th>İşlemi Gerçekleştiren Personel</th>
+        <th>Araç Plakası</th>
+        <th>Araç Konumu</th>
+        <th>Giriş Tarihi</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.Tbl_Musteri.AdSoyad</td>
+            <td>@x.Tbl_Personel.Ad</td>
+            <td>@x.Tbl_Arac.Plaka</td>
+            <td>@x.tbl_Alanlar.Ad</td>
+            <td>@x.GirisTarihi</td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, kayit => Url.Action("Index", new { kayit }))

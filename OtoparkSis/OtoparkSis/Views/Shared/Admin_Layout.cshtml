@@ -1,0 +1,56 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<title>Otopark Yönetlim Sistemi</title>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+        <button class=w3-bar-item w3-button w3-large
+                onclick="w3_close()">
+            Kapat &times;
+        </button>
+        <a href="/AnaSayfa/Index" class="w3-bar-item w3-button">Ana Sayfa</a>
+        <a href="/Arac/Index" class="w3-bar-item w3-button">Araç İşlemleri</a>
+        <a href="/Musteri/Index" class="w3-bar-item w3-button">Müşteri İşlemleri</a>
+        <a href="/ParkGiris/ParkGirisi" class="w3-bar-item w3-button">Araç Giriş</a>
+        <a href="/ParkGiris/Index" class="w3-bar-item w3-button">Araç Çıkış</a>
+        <a href="/ParkGiris/Index1" class="w3-bar-item w3-button">Park Halindeki Araç Listesi</a>
+        <a href="/TumIslem/Index" class="w3-bar-item w3-button">Tüm Park İşlemleri</a>
+        <a href="/AnaSayfa/Cikis" class="w3-bar-item w3-button">Çıkış Yap</a>
+    </div>
+
+    <div id="main">
+
+        <div class="w3-teal">
+            <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+            <div class="w3-container">
+                <h1>Otopark Yönetim Sistemi</h1>
+            </div>
+        </div>
+        <div class="w3-container">
+            @RenderBody()
+        </div>
+
+    </div>
+
+    <script>
+        function w3_open() {
+            document.getElementById("main").style.marginLeft = "25%";
+            document.getElementById("mySidebar").style.width = "25%";
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("openNav").style.display = 'none';
+        }
+        function w3_close() {
+            document.getElementById("main").style.marginLeft = "0%";
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("openNav").style.display = "inline-block";
+        }
+    </script>
+
+</body>
+</html>

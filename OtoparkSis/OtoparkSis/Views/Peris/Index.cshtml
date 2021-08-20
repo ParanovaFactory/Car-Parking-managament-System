@@ -1,0 +1,36 @@
+﻿@using OtoparkSis.Models.Entity
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Tbl_Personel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Yonetici.cshtml";
+}
+
+<h2>Personel Listesi</h2>
+<table class="table table-hover">
+    <tr style="background-color:rgb(252, 178, 22)">
+        <th>Personel ID</th>
+        <th>Personel Ad Soyad</th>
+        <th>Personel Kullanıcı Adı</th>
+        <th>Personel Şifresi</th>
+        <th>Personel Telefon Numarası</th>
+        <th>İşlemler</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.Id</td>
+            <td>@x.Ad</td>
+            <td>@x.KullaniciAdi</td>
+            <td>@x.Sifre</td>
+            <td>@x.Telefon</td>
+            <td>
+                <a href="/Peris/Sil/@x.Id" class="btn btn-danger">İşten Çıkar</a>
+                <a href="/Peris/Getir/@x.Id" class="btn btn-warning">Güncelle</a>
+            </td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, kayit => Url.Action("Index", new { kayit }))
+<a href="/Peris/Ekle" class="btn btn-success">Yeni Personel Ekle</a>

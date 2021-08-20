@@ -1,0 +1,24 @@
+﻿@model OtoparkSis.Models.Entity.Tbl_Personel
+@{
+    ViewBag.Title = "Getir";
+    Layout = "~/Views/Shared/_Yonetici.cshtml";
+}
+
+@using (Html.BeginForm("Guncelle", "Peris", FormMethod.Post))
+{
+    <h1>Personel Bilgisi Güncelleme Alanı</h1>
+    @Html.HiddenFor(x => x.Id)
+    <label>Personel Adı Soyadı</label>
+    @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+    <br />
+    <label>Personel Kullanıcı Adı</label>
+    @Html.TextBoxFor(x => x.KullaniciAdi, new { @class = "form-control" })
+    <br />
+    <label>Personel Şifresi</label>
+    @Html.TextBoxFor(x => x.Sifre, new { @class = "form-control" })
+    <br />
+    <label>Personel Telefon Numarası</label>
+    @Html.TextBoxFor(x => x.Telefon, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-success">Güncelle</button>
+}

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbOtoparkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_Alanlar">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="varchar" MaxLength="3" />
+    <Property Name="Durum" Type="bit" />
+  </EntityType>
+  <EntityType Name="Tbl_Arac">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AraçSahibi" Type="int" />
+    <Property Name="Plaka" Type="varchar" MaxLength="10" />
+    <Property Name="Durum" Type="bit" />
+    <Property Name="Durum2" Type="bit" />
+  </EntityType>
+  <EntityType Name="Tbl_Musteri">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdSoyad" Type="varchar" MaxLength="40" />
+    <Property Name="Telefon" Type="varchar" MaxLength="11" />
+    <Property Name="Durum" Type="bit" />
+  </EntityType>
+  <EntityType Name="Tbl_Park">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Musteri" Type="int" />
+    <Property Name="Personel" Type="int" />
+    <Property Name="Arac" Type="int" />
+    <Property Name="Konumu" Type="int" />
+    <Property Name="GirisTarihi" Type="smalldatetime" />
+    <Property Name="ÇikisTarihi" Type="smalldatetime" />
+    <Property Name="Fiyat" Type="int" />
+    <Property Name="Durum" Type="bit" />
+  </EntityType>
+  <EntityType Name="Tbl_Personel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="varchar" MaxLength="40" />
+    <Property Name="KullaniciAdi" Type="varchar" MaxLength="50" />
+    <Property Name="Sifre" Type="varchar" MaxLength="50" />
+    <Property Name="Telefon" Type="varchar" MaxLength="11" />
+    <Property Name="Durum" Type="bit" />
+  </EntityType>
+  <EntityType Name="Tbl_Yonetici">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdSoyad" Type="varchar" MaxLength="40" />
+    <Property Name="KullaniciAdi" Type="varchar" MaxLength="20" />
+    <Property Name="Sifre" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_Tbl_Arac_Tbl_Musteri">
+    <End Role="Tbl_Musteri" Type="Self.Tbl_Musteri" Multiplicity="0..1" />
+    <End Role="Tbl_Arac" Type="Self.Tbl_Arac" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Musteri">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tbl_Arac">
+        <PropertyRef Name="AraçSahibi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Park_tbl_Alanlar">
+    <End Role="tbl_Alanlar" Type="Self.tbl_Alanlar" Multiplicity="0..1" />
+    <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Alanlar">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tbl_Park">
+        <PropertyRef Name="Konumu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Park_Tbl_Arac">
+    <End Role="Tbl_Arac" Type="Self.Tbl_Arac" Multiplicity="0..1" />
+    <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Arac">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tbl_Park">
+        <PropertyRef Name="Arac" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Park_Tbl_Musteri">
+    <End Role="Tbl_Musteri" Type="Self.Tbl_Musteri" Multiplicity="0..1" />
+    <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Musteri">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tbl_Park">
+        <PropertyRef Name="Musteri" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Park_Tbl_Personel">
+    <End Role="Tbl_Personel" Type="Self.Tbl_Personel" Multiplicity="0..1" />
+    <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Personel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tbl_Park">
+        <PropertyRef Name="Personel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="BUGUNİSLEM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ENAKTİFUYE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ENBASARİLİPER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UYEARACSAYİSİ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="DbOtoparkModelStoreContainer">
+    <EntitySet Name="tbl_Alanlar" EntityType="Self.tbl_Alanlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_Arac" EntityType="Self.Tbl_Arac" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_Musteri" EntityType="Self.Tbl_Musteri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_Park" EntityType="Self.Tbl_Park" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_Personel" EntityType="Self.Tbl_Personel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_Yonetici" EntityType="Self.Tbl_Yonetici" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Tbl_Arac_Tbl_Musteri" Association="Self.FK_Tbl_Arac_Tbl_Musteri">
+      <End Role="Tbl_Musteri" EntitySet="Tbl_Musteri" />
+      <End Role="Tbl_Arac" EntitySet="Tbl_Arac" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Park_tbl_Alanlar" Association="Self.FK_Tbl_Park_tbl_Alanlar">
+      <End Role="tbl_Alanlar" EntitySet="tbl_Alanlar" />
+      <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Park_Tbl_Arac" Association="Self.FK_Tbl_Park_Tbl_Arac">
+      <End Role="Tbl_Arac" EntitySet="Tbl_Arac" />
+      <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Park_Tbl_Musteri" Association="Self.FK_Tbl_Park_Tbl_Musteri">
+      <End Role="Tbl_Musteri" EntitySet="Tbl_Musteri" />
+      <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Park_Tbl_Personel" Association="Self.FK_Tbl_Park_Tbl_Personel">
+      <End Role="Tbl_Personel" EntitySet="Tbl_Personel" />
+      <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

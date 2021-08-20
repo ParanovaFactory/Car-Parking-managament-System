@@ -1,0 +1,28 @@
+﻿@model OtoparkSis.Models.Entity.Tbl_Park
+@{
+    ViewBag.Title = "ParkGirisi";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+<h2>Araç Park Girişi</h2>
+<form method="post">
+    <label>Müşteri Adı</label>
+    @Html.DropDownListFor(x => x.Tbl_Musteri.Id, (List<SelectListItem>)
+    ViewBag.dgr1, new { @class = "form-control" })
+    <br />
+    <label>Personel Adı</label>
+    @Html.DropDownListFor(x => x.Tbl_Personel.Id, (List<SelectListItem>)
+    ViewBag.dgr2, new { @class = "form-control" })
+    <br />
+    <label>Araç Plakası</label>
+    @Html.DropDownListFor(x => x.Tbl_Arac.Id, (List<SelectListItem>)
+    ViewBag.dgr3, new { @class = "form-control" })
+    <br />
+    <label>Aracın Park Edileceği Alan</label>
+    @Html.DropDownListFor(x => x.tbl_Alanlar.Id, (List<SelectListItem>)
+    ViewBag.dgr4, new { @class = "form-control" })
+    <br />
+    <label>Araç Giriş Tarihi</label>
+    <input type="text" class="form-control" name="GirisTarihi" value="@DateTime.Now.ToString()" />
+    <br />
+    <button class="btn btn-info">Araç Park Girişi Yap</button>
+</form>

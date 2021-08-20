@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Yonetici.cshtml";
+}
+
+<h1>Hoşgeldiniz</h1>
+<br />
+<a class="weatherwidget-io" href="https://forecast7.com/tr/36d6333d62/mersin-province/" data-label_1="MERSIN" data-label_2="Hava Durumu" data-theme="original">MERSIN Hava Durumu</a>
+<script>
+    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+</script>
+<br />
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <!-- custom-theme -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Esteem Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //custom-theme -->
+    <link href="~/web/web3/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/web3/css/component.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/web3/css/export.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/web3/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/web3/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+    <!-- font-awesome-icons -->
+    <link href="~/web/web3/css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome-icons -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+</head>
+<body>
+    <!-- banner -->
+    <div class="clearfix"></div>
+
+    <ul class="ca-menu">
+        <li>
+            <a href="#">
+                <i class="fa fa-car" aria-hidden="true"></i>
+                <div class="ca-content">
+                    <h4 class="ca-main">@ViewBag.dgr1</h4>
+                    <h3 class="ca-sub">Araç Sayısı</h3>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <div class="ca-content">
+                    <h4 class="ca-main one">@ViewBag.dgr2</h4>
+                    <h3 class="ca-sub one">Üye Sayısı</h3>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-money" aria-hidden="true"></i>
+                <div class="ca-content">
+                    <h4 class="ca-main two">@ViewBag.dgr3</h4>
+                    <h3 class="ca-sub two">Kasadaki Tutar</h3>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <div class="ca-content">
+                    <h4 class="ca-main two">@ViewBag.dgr4</h4>
+                    <h3 class="ca-sub two">Personel Sayısı</h3>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-inbox" aria-hidden="true"></i>
+                <div class="ca-content">
+                    <h4 class="ca-main three">@ViewBag.dgr5</h4>
+                    <h3 class="ca-sub three">Otopaktaki Araçlar</h3>
+                </div>
+            </a>
+        </li>
+
+    </ul>
+
+    <ul class="ca-menu">
+        <li>
+            <a href="#">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                <div class="ca-content">
+                    <h4 class="ca-main">@ViewBag.dgr6</h4>
+                    <h3 class="ca-sub">Boş Alan Sayımız</h3>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <div class="ca-content">
+                    <h4 class="ca-main one">@ViewBag.dgr7</h4>
+                    <h3 class="ca-sub one">En Aktif Üye</h3>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <div class="ca-content">
+                    <h4 class="ca-main two">@ViewBag.dgr8</h4>
+                    <h3 class="ca-sub two">En Fazla Aracı Olan Üye</h3>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                <div class="ca-content">
+
+                    <h4 class="ca-main three">@ViewBag.dgr9</h4>
+
+                    <h3 class="ca-sub three">En Fazla Fazla İşlem Yapan Personel</h3>
+                </div>
+            </a>
+        </li>
+
+    </ul>
+    <ul class="ca-menu">
+        <li>
+            <a href="#">
+                <i class="fa fa-barcode" aria-hidden="true"></i>
+                <div class="ca-content">
+                    <h4 class="ca-main">@ViewBag.dgr10</h4>
+                    <h3 class="ca-sub">Bügünki İşlem Sayısı</h3>
+                </div>
+            </a>
+        </li>
+    </ul>
+</body>
+</html>

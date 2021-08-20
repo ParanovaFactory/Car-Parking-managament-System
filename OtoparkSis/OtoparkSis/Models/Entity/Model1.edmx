@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbOtoparkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Alanlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="3" />
+          <Property Name="Durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tbl_Arac">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AraçSahibi" Type="int" />
+          <Property Name="Plaka" Type="varchar" MaxLength="10" />
+          <Property Name="Durum" Type="bit" />
+          <Property Name="Durum2" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tbl_Musteri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="varchar" MaxLength="40" />
+          <Property Name="Telefon" Type="varchar" MaxLength="11" />
+          <Property Name="Durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tbl_Park">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Musteri" Type="int" />
+          <Property Name="Personel" Type="int" />
+          <Property Name="Arac" Type="int" />
+          <Property Name="Konumu" Type="int" />
+          <Property Name="GirisTarihi" Type="smalldatetime" />
+          <Property Name="ÇikisTarihi" Type="smalldatetime" />
+          <Property Name="Fiyat" Type="int" />
+          <Property Name="Durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tbl_Personel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="40" />
+          <Property Name="KullaniciAdi" Type="varchar" MaxLength="50" />
+          <Property Name="Sifre" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="11" />
+          <Property Name="Durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tbl_Yonetici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="varchar" MaxLength="40" />
+          <Property Name="KullaniciAdi" Type="varchar" MaxLength="20" />
+          <Property Name="Sifre" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Tbl_Arac_Tbl_Musteri">
+          <End Role="Tbl_Musteri" Type="Self.Tbl_Musteri" Multiplicity="0..1" />
+          <End Role="Tbl_Arac" Type="Self.Tbl_Arac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Musteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Arac">
+              <PropertyRef Name="AraçSahibi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Park_tbl_Alanlar">
+          <End Role="tbl_Alanlar" Type="Self.tbl_Alanlar" Multiplicity="0..1" />
+          <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Alanlar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Park">
+              <PropertyRef Name="Konumu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Park_Tbl_Arac">
+          <End Role="Tbl_Arac" Type="Self.Tbl_Arac" Multiplicity="0..1" />
+          <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Arac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Park">
+              <PropertyRef Name="Arac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Park_Tbl_Musteri">
+          <End Role="Tbl_Musteri" Type="Self.Tbl_Musteri" Multiplicity="0..1" />
+          <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Musteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Park">
+              <PropertyRef Name="Musteri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Park_Tbl_Personel">
+          <End Role="Tbl_Personel" Type="Self.Tbl_Personel" Multiplicity="0..1" />
+          <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Personel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Park">
+              <PropertyRef Name="Personel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="BUGUNİSLEM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ENAKTİFUYE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ENBASARİLİPER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UYEARACSAYİSİ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DbOtoparkModelStoreContainer">
+          <EntitySet Name="tbl_Alanlar" EntityType="Self.tbl_Alanlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Arac" EntityType="Self.Tbl_Arac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Musteri" EntityType="Self.Tbl_Musteri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Park" EntityType="Self.Tbl_Park" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Personel" EntityType="Self.Tbl_Personel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Yonetici" EntityType="Self.Tbl_Yonetici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_Arac_Tbl_Musteri" Association="Self.FK_Tbl_Arac_Tbl_Musteri">
+            <End Role="Tbl_Musteri" EntitySet="Tbl_Musteri" />
+            <End Role="Tbl_Arac" EntitySet="Tbl_Arac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Park_tbl_Alanlar" Association="Self.FK_Tbl_Park_tbl_Alanlar">
+            <End Role="tbl_Alanlar" EntitySet="tbl_Alanlar" />
+            <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Park_Tbl_Arac" Association="Self.FK_Tbl_Park_Tbl_Arac">
+            <End Role="Tbl_Arac" EntitySet="Tbl_Arac" />
+            <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Park_Tbl_Musteri" Association="Self.FK_Tbl_Park_Tbl_Musteri">
+            <End Role="Tbl_Musteri" EntitySet="Tbl_Musteri" />
+            <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Park_Tbl_Personel" Association="Self.FK_Tbl_Park_Tbl_Personel">
+            <End Role="Tbl_Personel" EntitySet="Tbl_Personel" />
+            <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbOtoparkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Alanlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="Tbl_Park" Relationship="Self.FK_Tbl_Park_tbl_Alanlar" FromRole="tbl_Alanlar" ToRole="Tbl_Park" />
+        </EntityType>
+        <EntityType Name="Tbl_Arac">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AraçSahibi" Type="Int32" />
+          <Property Name="Plaka" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="Tbl_Park" Relationship="Self.FK_Tbl_Park_Tbl_Arac" FromRole="Tbl_Arac" ToRole="Tbl_Park" />
+          <NavigationProperty Name="Tbl_Musteri" Relationship="DbOtoparkModel.FK_Tbl_Arac_Tbl_Musteri" FromRole="Tbl_Arac" ToRole="Tbl_Musteri" />
+          <Property Name="Durum2" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Tbl_Park">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Musteri" Type="Int32" />
+          <Property Name="Personel" Type="Int32" />
+          <Property Name="Arac" Type="Int32" />
+          <Property Name="Konumu" Type="Int32" />
+          <Property Name="GirisTarihi" Type="DateTime" Precision="0" />
+          <Property Name="ÇikisTarihi" Type="DateTime" Precision="0" />
+          <Property Name="Fiyat" Type="Int32" />
+          <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="tbl_Alanlar" Relationship="Self.FK_Tbl_Park_tbl_Alanlar" FromRole="Tbl_Park" ToRole="tbl_Alanlar" />
+          <NavigationProperty Name="Tbl_Arac" Relationship="Self.FK_Tbl_Park_Tbl_Arac" FromRole="Tbl_Park" ToRole="Tbl_Arac" />
+          <NavigationProperty Name="Tbl_Musteri" Relationship="DbOtoparkModel.FK_Tbl_Park_Tbl_Musteri" FromRole="Tbl_Park" ToRole="Tbl_Musteri" />
+          <NavigationProperty Name="Tbl_Personel" Relationship="DbOtoparkModel.FK_Tbl_Park_Tbl_Personel" FromRole="Tbl_Park" ToRole="Tbl_Personel" />
+        </EntityType>
+        <Association Name="FK_Tbl_Park_tbl_Alanlar">
+          <End Role="tbl_Alanlar" Type="Self.tbl_Alanlar" Multiplicity="0..1" />
+          <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Alanlar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Park">
+              <PropertyRef Name="Konumu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Park_Tbl_Arac">
+          <End Role="Tbl_Arac" Type="Self.Tbl_Arac" Multiplicity="0..1" />
+          <End Role="Tbl_Park" Type="Self.Tbl_Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Arac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Park">
+              <PropertyRef Name="Arac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbOtoparkEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Alanlar" EntityType="Self.tbl_Alanlar" />
+          <EntitySet Name="Tbl_Arac" EntityType="Self.Tbl_Arac" />
+          <EntitySet Name="Tbl_Park" EntityType="Self.Tbl_Park" />
+          <AssociationSet Name="FK_Tbl_Park_tbl_Alanlar" Association="Self.FK_Tbl_Park_tbl_Alanlar">
+            <End Role="tbl_Alanlar" EntitySet="tbl_Alanlar" />
+            <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Park_Tbl_Arac" Association="Self.FK_Tbl_Park_Tbl_Arac">
+            <End Role="Tbl_Arac" EntitySet="Tbl_Arac" />
+            <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+          </AssociationSet>
+          <EntitySet Name="Tbl_Musteri" EntityType="DbOtoparkModel.Tbl_Musteri" />
+          <AssociationSet Name="FK_Tbl_Arac_Tbl_Musteri" Association="DbOtoparkModel.FK_Tbl_Arac_Tbl_Musteri">
+            <End Role="Tbl_Musteri" EntitySet="Tbl_Musteri" />
+            <End Role="Tbl_Arac" EntitySet="Tbl_Arac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Park_Tbl_Musteri" Association="DbOtoparkModel.FK_Tbl_Park_Tbl_Musteri">
+            <End Role="Tbl_Musteri" EntitySet="Tbl_Musteri" />
+            <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+          </AssociationSet>
+          <EntitySet Name="Tbl_Personel" EntityType="DbOtoparkModel.Tbl_Personel" />
+          <AssociationSet Name="FK_Tbl_Park_Tbl_Personel" Association="DbOtoparkModel.FK_Tbl_Park_Tbl_Personel">
+            <End Role="Tbl_Personel" EntitySet="Tbl_Personel" />
+            <End Role="Tbl_Park" EntitySet="Tbl_Park" />
+          </AssociationSet>
+          <FunctionImport Name="BUGUNİSLEM" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="ENAKTİFUYE" ReturnType="Collection(String)" />
+          <FunctionImport Name="ENBASARİLİPER" ReturnType="Collection(String)" />
+          <FunctionImport Name="UYEARACSAYİSİ" ReturnType="Collection(String)" />
+          <EntitySet Name="Tbl_Yonetici" EntityType="DbOtoparkModel.Tbl_Yonetici" />
+        </EntityContainer>
+        <EntityType Name="Tbl_Musteri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdSoyad" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="Tbl_Arac" Relationship="DbOtoparkModel.FK_Tbl_Arac_Tbl_Musteri" FromRole="Tbl_Musteri" ToRole="Tbl_Arac" />
+          <NavigationProperty Name="Tbl_Park" Relationship="DbOtoparkModel.FK_Tbl_Park_Tbl_Musteri" FromRole="Tbl_Musteri" ToRole="Tbl_Park" />
+        </EntityType>
+        <Association Name="FK_Tbl_Arac_Tbl_Musteri">
+          <End Type="DbOtoparkModel.Tbl_Musteri" Role="Tbl_Musteri" Multiplicity="0..1" />
+          <End Type="DbOtoparkModel.Tbl_Arac" Role="Tbl_Arac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Musteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Arac">
+              <PropertyRef Name="AraçSahibi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Park_Tbl_Musteri">
+          <End Type="DbOtoparkModel.Tbl_Musteri" Role="Tbl_Musteri" Multiplicity="0..1" />
+          <End Type="DbOtoparkModel.Tbl_Park" Role="Tbl_Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Musteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Park">
+              <PropertyRef Name="Musteri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tbl_Personel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="Tbl_Park" Relationship="DbOtoparkModel.FK_Tbl_Park_Tbl_Personel" FromRole="Tbl_Personel" ToRole="Tbl_Park" />
+        </EntityType>
+        <Association Name="FK_Tbl_Park_Tbl_Personel">
+          <End Type="DbOtoparkModel.Tbl_Personel" Role="Tbl_Personel" Multiplicity="0..1" />
+          <End Type="DbOtoparkModel.Tbl_Park" Role="Tbl_Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Personel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Park">
+              <PropertyRef Name="Personel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tbl_Yonetici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdSoyad" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbOtoparkModelStoreContainer" CdmEntityContainer="DbOtoparkEntities">
+          <EntitySetMapping Name="tbl_Alanlar">
+            <EntityTypeMapping TypeName="DbOtoparkModel.tbl_Alanlar">
+              <MappingFragment StoreEntitySet="tbl_Alanlar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Arac">
+            <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Arac">
+              <MappingFragment StoreEntitySet="Tbl_Arac">
+                <ScalarProperty Name="Durum2" ColumnName="Durum2" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AraçSahibi" ColumnName="AraçSahibi" />
+                <ScalarProperty Name="Plaka" ColumnName="Plaka" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Park">
+            <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Park">
+              <MappingFragment StoreEntitySet="Tbl_Park">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Musteri" ColumnName="Musteri" />
+                <ScalarProperty Name="Personel" ColumnName="Personel" />
+                <ScalarProperty Name="Arac" ColumnName="Arac" />
+                <ScalarProperty Name="Konumu" ColumnName="Konumu" />
+                <ScalarProperty Name="GirisTarihi" ColumnName="GirisTarihi" />
+                <ScalarProperty Name="ÇikisTarihi" ColumnName="ÇikisTarihi" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Musteri">
+            <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Musteri">
+              <MappingFragment StoreEntitySet="Tbl_Musteri">
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Personel">
+            <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Personel">
+              <MappingFragment StoreEntitySet="Tbl_Personel">
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="BUGUNİSLEM" FunctionName="DbOtoparkModel.Store.BUGUNİSLEM" />
+          <FunctionImportMapping FunctionImportName="ENAKTİFUYE" FunctionName="DbOtoparkModel.Store.ENAKTİFUYE" />
+          <FunctionImportMapping FunctionImportName="ENBASARİLİPER" FunctionName="DbOtoparkModel.Store.ENBASARİLİPER" />
+          <FunctionImportMapping FunctionImportName="UYEARACSAYİSİ" FunctionName="DbOtoparkModel.Store.UYEARACSAYİSİ" />
+          <EntitySetMapping Name="Tbl_Yonetici">
+            <EntityTypeMapping TypeName="DbOtoparkModel.Tbl_Yonetici">
+              <MappingFragment StoreEntitySet="Tbl_Yonetici">
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

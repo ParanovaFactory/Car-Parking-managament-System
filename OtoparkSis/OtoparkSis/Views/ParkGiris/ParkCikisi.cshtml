@@ -1,0 +1,35 @@
+﻿@model OtoparkSis.Models.Entity.Tbl_Park
+@{
+    ViewBag.Title = "ParkCikisi";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Cikar", "ParkGiris", FormMethod.Post))
+{
+    <h2>Araç Park Çıkışı</h2>
+    <br />
+    <label>İşlem Id Bilgisi</label>
+    @Html.TextBoxFor(x => x.Id, new { @class = "form-control" })
+    <label>İşlemi Yapan Personel</label>
+    @*@Html.DropDownListFor(x => x.Tbl_Personel.Id, (List<SelectListItem>)
+        ViewBag.dgr5, new { @class = "form-control" })*@
+    @Html.TextBoxFor(x => x.Personel, new { @class = "form-control" })
+    <br />
+    <label>Çıkış Yapan Araç Id'si</label>
+    @*@Html.DropDownListFor(x => x.Tbl_Arac.Id, (List<SelectListItem>)
+        ViewBag.dgr6, new { @class = "form-control" })*@
+    @Html.TextBoxFor(x => x.Arac, new { @class = "form-control" })
+    <br />
+    <label>Araç Giriş Tarihi</label>
+    @Html.TextBoxFor(x => x.GirisTarihi, new { @class = "form-control" })
+    <br />
+    <label>Araç Çıkış Tarihi</label>
+    <input type="text" class="form-control" name="ÇikisTarihi" value="@DateTime.Now.ToString()" />
+    <br />
+    <label>Otopark Ücreti</label>
+    <input type="text" class="form-control" name="Fiyat" value="@ViewBag.dgr7" />
+    <br />
+    <button class="btn btn-info">Araç Çıkışı Yap</button>
+}
